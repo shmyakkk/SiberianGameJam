@@ -4,13 +4,12 @@ using UnityEngine;
 
 public abstract class BaseItem : MonoBehaviour
 {
-    public virtual void Enter() { }
+    public bool IsUsed { get; set; } = false;
+
+    public virtual void Enter() => IsUsed = true;
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKey(KeyCode.E))
-        {
-            Enter();
-        }
+        if (!IsUsed && Input.GetKey(KeyCode.E)) Enter();
     }
 }
