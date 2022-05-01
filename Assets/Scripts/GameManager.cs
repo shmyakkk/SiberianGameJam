@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timer;
 
-    public int DayTime { get; } = 10;
     public int NightTime { get; } = 10;
 
     private void Start()
@@ -16,23 +15,11 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
 
         Time.timeScale = 1;
-        StartCoroutine(DayTimer(DayTime));
+
+        GlobalEventManager.OnStartedNight.AddListener(StartNightTimer);
     }
 
-
-    private IEnumerator DayTimer(int time)
-    {
-        while (time > 0)
-        {
-            yield return new WaitForSeconds(1);
-            time--;
-        }
-        if (time == 0)
-        {
-            StartCoroutine(NightTimer(NightTime));
-            GlobalEventManager.SendStartedNight();
-        }
-    }
+    private void StartNightTimer() => StartCoroutine(NightTimer(NightTime));
 
     private IEnumerator NightTimer(int time)
     {
@@ -45,8 +32,6 @@ public class GameManager : MonoBehaviour
         if (time == 0)
         {
             timer.text = "";
-            StartCoroutine(DayTimer(DayTime));
-            
             GlobalEventManager.SendStartedDay();
         }
     }

@@ -4,12 +4,20 @@ using UnityEngine;
 
 public abstract class BaseItem : MonoBehaviour
 {
-    public bool IsUsed { get; set; } = false;
+    public bool Available { get; set; } = true;
 
-    public virtual void Enter() => IsUsed = true;
+    private void Awake() => SetBoxCollider();
+
+    private void SetBoxCollider()
+    {
+        var boxCol = gameObject.AddComponent<BoxCollider>();
+        boxCol.isTrigger = true;
+        boxCol.size += new Vector3(0.3f, 0.3f, 10f);
+    }
+    public virtual void Enter() => Available = false;
 
     private void OnTriggerStay(Collider other)
     {
-        if (!IsUsed && Input.GetKey(KeyCode.E)) Enter();
+        if (Available && Input.GetKey(KeyCode.E)) Enter();
     }
 }
