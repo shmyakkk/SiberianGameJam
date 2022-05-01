@@ -1627,6 +1627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  bomb: {fileID: 1341919079348870486, guid: dd362106542be3a419da012c3ff970c2, type: 3}
 --- !u!54 &1640349290
 Rigidbody:
   m_ObjectHideFlags: 0
