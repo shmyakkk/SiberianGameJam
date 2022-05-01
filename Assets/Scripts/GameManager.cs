@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
+
         Time.timeScale = 1;
         StartCoroutine(DayTimer(DayTime));
     }
