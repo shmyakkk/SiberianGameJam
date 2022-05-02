@@ -22,7 +22,8 @@ public class EnemyController : MonoBehaviour
     private Vector3 upLadder, downLadder, ladderPos, StartPosition;
 
     int dir = 1, up = 8;
-
+    [SerializeField]float rotationSpeed;
+    [SerializeField]float deg_rotation;
     float StartSpeed;
 
     float chanse = 0;
@@ -36,13 +37,17 @@ public class EnemyController : MonoBehaviour
 
         if (ToTheRight){
             dir = 1;
+            deg_rotation = -90;
         }
         else{
             dir = -1;
+            deg_rotation = 90;
         }
     }
 
     
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, state, rotationSpeed * Time.deltaTime);
+
     void FixedUpdate()
     {
         Enemy_move();
@@ -55,9 +60,13 @@ public class EnemyController : MonoBehaviour
 
             if (tr.position.x >= Patrol_distans + StartPosition.x){
                 dir = -1;
+                deg_rotation *= -1;
+                transform.rotation = Quaternion.RotateTowards(transform.rotation,Quaternion.Euler(new Vector3(0,deg_rotation,0)),rotationSpeed*Time.fixedDeltaTime);
             }
             if (tr.position.x <= StartPosition.x - Patrol_distans){
                 dir = 1;
+                deg_rotation *= -1;
+                transform.rotation = Quaternion.RotateTowards(transform.rotation,Quaternion.Euler(new Vector3(0,deg_rotation,0)),rotationSpeed*Time.fixedDeltaTime);
             }
 
         }
@@ -73,11 +82,6 @@ public class EnemyController : MonoBehaviour
             harassment = false;
         }
 
-    }
-
-    void LadderMove(){
-        rb.isKinematic = true;
-        rb.velocity = new Vector3(rb.position.x, up * speed,0);
     }
       
     void OnTriggerStay (Collider  other)
