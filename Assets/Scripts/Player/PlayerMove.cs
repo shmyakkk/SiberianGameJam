@@ -5,17 +5,55 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float speed = 3f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private List<AudioClip> steps;
+    [SerializeField] private List<AudioClip> stepsNight;
+    [SerializeField] private AudioClip ladder;
+    [SerializeField] private AudioClip ladderNight;
+
     private Rigidbody playerRB;
+    private PlayerThrow playerThrow;
 
     private bool isStair = false;
     private bool useStair = false;
     private Vector3 stairPos;
 
+    private bool isDay = true;
+
     private void Start()
     {
+        GlobalEventManager.OnStartedDay.AddListener(StartDaySteps);
+        GlobalEventManager.OnStartedNight.AddListener(StartNightSteps);
+
         playerRB = GetComponent<Rigidbody>();
+        playerThrow = GetComponent<PlayerThrow>();
     }
-    private void Update()
+    private void Update() => MoveAndRotate();
+
+    private void StartDaySteps() => isDay = true;
+    private void StartNightSteps() => isDay = false;
+    private void PlayStepsSound()
+    {
+        if (!audioSource.isPlaying)
+        {
+            if (isDay)
+                audioSource.PlayOneShot(steps[Random.Range(0, steps.Count)]);
+            else
+                audioSource.PlayOneShot(stepsNight[Random.Range(0, stepsNight.Count)]);
+        }
+    }
+    private void PlayLadderSound()
+    {
+        if (!audioSource.isPlaying)
+        {
+            if (isDay)
+                audioSource.PlayOneShot(ladder);
+            else
+                audioSource.PlayOneShot(ladderNight);
+        }
+    }
+
+    private void MoveAndRotate()
     {
         float inputX = useStair ? 0 : Input.GetAxis("Horizontal");
 
@@ -31,10 +69,21 @@ public class PlayerMove : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(stairPos.x, transform.position.y, transform.position.z), 3 * Time.deltaTime);
         }
 
+        if (inputX > 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Right;
+        if (inputX < 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Left;
+
         if (directionVector.magnitude > Mathf.Abs(0.1f))
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotationVector), Time.deltaTime * 10);
 
         playerRB.velocity = directionVector * speed;
+
+        if (inputX != 0) PlayStepsSound(); // шаги
+
+        /*if (useStair)
+        {
+            if (inputY != 0) PlayLadderSound(); // лестница лучше не включать..
+            else audioSource.Stop();
+        }*/
     }
 
     private void OnTriggerStay(Collider other)
@@ -52,7 +101,11 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Ground")) useStair = true;
+        if (other.CompareTag("Ground"))
+        {
+            useStair = true;
+            playerThrow.CurrentState = PlayerThrow.ThrowStates.Disabled;
+        }
 
         if (other.CompareTag("Stair"))
         {

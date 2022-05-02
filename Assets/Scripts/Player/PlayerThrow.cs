@@ -9,14 +9,24 @@ public class PlayerThrow : MonoBehaviour
     private float startTime = 0;
     private float holdTime = 0;
 
-    private bool availableThrow = true;
+    private Vector3 direction;
+    private Vector3 position;
 
     private void Start() => GlobalEventManager.OnEnterQ.AddListener(AvailableThrow);
     private void Update() => ThrowBomb();
 
+    public ThrowStates CurrentState { get; set; } = ThrowStates.Right;
+
+    public enum ThrowStates
+    {
+        Left,
+        Right,
+        Disabled
+    }
+
     private void ThrowBomb()
     {
-        if (availableThrow)
+        if (CurrentState != ThrowStates.Disabled)
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
@@ -26,11 +36,24 @@ public class PlayerThrow : MonoBehaviour
             {
                 holdTime = Time.time - startTime;
 
-                var force = holdTime * 12;
-                if (force > 10) force = 10;
+                var force = holdTime * 20;
+                if (force > 15) force = 15;
 
-                var currentBomb = Instantiate(bomb, gameObject.transform.position + Vector3.right, bomb.transform.rotation);
+                if (CurrentState == ThrowStates.Left)
+                {
+                    direction = new Vector3(-1, 1, 0);
+                    position = Vector3.left;
+                }
+
+                if (CurrentState == ThrowStates.Right)
+                {
+                    direction = new Vector3(1, 1, 0);
+                    position = Vector3.right;
+                }
+
+                var currentBomb = Instantiate(bomb, gameObject.transform.position + position, bomb.transform.rotation);
                 currentBomb.GetComponent<Bomb>().Force = force;
+                currentBomb.GetComponent<Bomb>().ThrowDirection = direction;
 
                 startTime = 0;
                 holdTime = 0;
@@ -42,14 +65,15 @@ public class PlayerThrow : MonoBehaviour
 
     private void AvailableThrow()
     {
-        availableThrow = false;
+        CurrentState = ThrowStates.Disabled;
         StartCoroutine(AvailableThrowTime());
     }
 
     private IEnumerator AvailableThrowTime()
     {
         yield return new WaitForSeconds(10);
-        availableThrow = true;
+
+        CurrentState = ThrowStates.Right;
         GlobalEventManager.SendReloadQ();
     }
 }
