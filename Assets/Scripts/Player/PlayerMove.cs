@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float speed = 3f;
     private Rigidbody playerRB;
+    private PlayerThrow playerThrow;
 
     private bool isStair = false;
     private bool useStair = false;
@@ -14,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     private void Start()
     {
         playerRB = GetComponent<Rigidbody>();
+        playerThrow = GetComponent<PlayerThrow>();
     }
     private void Update()
     {
@@ -30,6 +32,9 @@ public class PlayerMove : MonoBehaviour
             rotationVector = Vector3.back;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(stairPos.x, transform.position.y, transform.position.z), 3 * Time.deltaTime);
         }
+
+        if (inputX > 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Right;
+        if (inputX < 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Left;
 
         if (directionVector.magnitude > Mathf.Abs(0.1f))
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotationVector), Time.deltaTime * 10);
@@ -52,7 +57,11 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Ground")) useStair = true;
+        if (other.CompareTag("Ground"))
+        {
+            useStair = true;
+            playerThrow.CurrentState = PlayerThrow.ThrowStates.Disabled;
+        }
 
         if (other.CompareTag("Stair"))
         {

@@ -10,13 +10,13 @@ public class Bomb : MonoBehaviour
     private float force;
 
     public float Force { get => force; set => force = value; }
+    public Vector3 ThrowDirection { get => throwDirection; set => throwDirection = value; }
 
     private void Start()
     {
         bombRB = GetComponent<Rigidbody>();
-        throwDirection = new Vector3(1, 1, 0);
 
-        bombRB.AddForce(throwDirection * Force, ForceMode.Impulse);
+        bombRB.AddForce(ThrowDirection * Force, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision collision)
