@@ -4,29 +4,18 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
     Transform tr;
-
     Rigidbody rb;
-
     [SerializeField]private GameObject Player;
-
     [SerializeField] private bool ToTheRight;
-
-    [SerializeField] private float speed,Patrol_distans,DistanseOfVision, chanseClimbing;
-
-    private bool climbing = false, already = false;
-
-    [SerializeField]private bool harassment = false;
-
+    [SerializeField] private float speed,Patrol_distans,VisionFace,VisionBack,VertVision, chanseClimbing;
+    private bool climbing = false, already = false, harassment = false;
     private Vector3 upLadder, downLadder, ladderPos, StartPosition;
-
-    int dir = 1, up = 8;
-    [SerializeField]float rotationSpeed;
-    [SerializeField]float deg_rotation;
-    float StartSpeed;
-
-    float chanse = 0;
+    private int dir = 1, up = 8;
+    [SerializeField]private float rotationSpeed;
+    public static Vector3 BombCoord;
+    private float chanse = 0;
+    private Vector3 rotationVector;
 
     void Start()
     {
@@ -34,56 +23,55 @@ public class EnemyController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
 
         StartPosition = tr.position;
-
         if (ToTheRight){
             dir = 1;
-            deg_rotation = -90;
+            tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
         }
         else{
             dir = -1;
-            deg_rotation = 90;
+            tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
         }
     }
-
-    
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, state, rotationSpeed * Time.deltaTime);
-
     void FixedUpdate()
     {
         Enemy_move();
     }
-
     void Enemy_move(){
-
         if (!harassment && !climbing){
-            rb.velocity = new Vector3(speed*dir, 0, 0);
+            
+                rb.velocity = new Vector3(speed*dir, 0, 0);
 
             if (tr.position.x >= Patrol_distans + StartPosition.x){
                 dir = -1;
-                deg_rotation *= -1;
-                transform.rotation = Quaternion.RotateTowards(transform.rotation,Quaternion.Euler(new Vector3(0,deg_rotation,0)),rotationSpeed*Time.fixedDeltaTime);
+                tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
             }
             if (tr.position.x <= StartPosition.x - Patrol_distans){
                 dir = 1;
-                deg_rotation *= -1;
-                transform.rotation = Quaternion.RotateTowards(transform.rotation,Quaternion.Euler(new Vector3(0,deg_rotation,0)),rotationSpeed*Time.fixedDeltaTime);
+               tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
             }
-
         }
-
         var S = Player.transform.position - tr.position;
-        if(S.magnitude < DistanseOfVision)
+        if(S.magnitude < VisionFace && Mathf.Abs(Player.transform.position.y - tr.position.y) <= VertVision)
         {
-            harassment = true;
-
-            tr.position = Vector3.MoveTowards(tr.position, Player.transform.position, speed * Time.fixedDeltaTime);
+            if (tr.rotation.eulerAngles.y == 90 && (Player.transform.position.x < tr.position.x)){
+                harassment = true;
+            } else if(Player.transform.position.x > tr.position.x && tr.position.x - Player.transform.position.x <= VisionBack){
+                tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
+                harassment = true;
+            } else if(tr.rotation.eulerAngles.y == -90 && (Player.transform.position.x > tr.position.x)){
+                    harassment = true;
+                }else if (Player.transform.position.x < tr.position.x && Player.transform.position.x - tr.position.x <= VisionBack){
+                    tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
+                    harassment = true;
+                }
+            if (harassment)
+                tr.position = Vector3.MoveTowards(tr.position, Player.transform.position, speed * Time.fixedDeltaTime);
         }
         else{
             harassment = false;
         }
 
     }
-      
     void OnTriggerStay (Collider  other)
 	{
         if(other.gameObject.CompareTag("ladder") && !harassment)
@@ -93,7 +81,6 @@ public class EnemyController : MonoBehaviour
                 already = true;
             } 
             if (chanse <= chanseClimbing ){
-                //rb.isKinematic = true; 
                 ladderPos = other.transform.position;
                 if (up == 8){
                     if(tr.position.y < ladderPos.y && !climbing)
@@ -108,11 +95,9 @@ public class EnemyController : MonoBehaviour
             }
         } 
     }
-
     void OnTriggerEnter(Collider other){
         if(other.gameObject.CompareTag("Ground")){
             if(up == -1){
-                //rb.isKinematic = false;
                 climbing = false;
                 StartPosition = tr.position;
                 ToTheRight = true;
@@ -122,27 +107,22 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
-    
     void OnTriggerExit (Collider  other)
 	{
         if(other.gameObject.CompareTag("ladder"))
         {
             Debug.Log("Loh");
-            //rb.isKinematic = false;
             climbing = false;
             StartPosition = tr.position;
             StartCoroutine(Waiting(2));
             Enemy_move();   
-
         }
     }
-
     IEnumerator Waiting(int waitTime)
     {
         yield return new WaitForSeconds(waitTime);
         rb.isKinematic = false;
         already = false;
         up = 8;
-
     }    
 }
