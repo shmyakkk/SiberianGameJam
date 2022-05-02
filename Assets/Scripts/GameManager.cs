@@ -6,6 +6,8 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timer;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private List<AudioClip> nature;
 
     public int NightTime { get; } = 10;
 
@@ -17,6 +19,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         GlobalEventManager.OnStartedNight.AddListener(StartNightTimer);
+
+        InvokeRepeating(nameof(RandomSound), 5, Random.Range(10, 15));
     }
 
     private void StartNightTimer() => StartCoroutine(NightTimer(NightTime));
@@ -34,5 +38,10 @@ public class GameManager : MonoBehaviour
             timer.text = "";
             GlobalEventManager.SendStartedDay();
         }
+    }
+
+    private void RandomSound()
+    {
+        audioSource.PlayOneShot(nature[Random.Range(0, nature.Count)]);
     }
 }

@@ -7,7 +7,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float speed = 3f;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private List<AudioClip> steps;
-    [SerializeField] private List<AudioClip> nightSteps;
+    [SerializeField] private List<AudioClip> stepsNight;
+    [SerializeField] private AudioClip ladder;
+    [SerializeField] private AudioClip ladderNight;
 
     private Rigidbody playerRB;
     private PlayerThrow playerThrow;
@@ -37,7 +39,17 @@ public class PlayerMove : MonoBehaviour
             if (isDay)
                 audioSource.PlayOneShot(steps[Random.Range(0, steps.Count)]);
             else
-                audioSource.PlayOneShot(nightSteps[Random.Range(0, nightSteps.Count)]);
+                audioSource.PlayOneShot(stepsNight[Random.Range(0, stepsNight.Count)]);
+        }
+    }
+    private void PlayLadderSound()
+    {
+        if (!audioSource.isPlaying)
+        {
+            if (isDay)
+                audioSource.PlayOneShot(ladder);
+            else
+                audioSource.PlayOneShot(ladderNight);
         }
     }
 
@@ -65,7 +77,13 @@ public class PlayerMove : MonoBehaviour
 
         playerRB.velocity = directionVector * speed;
 
-        if (inputX != 0) PlayStepsSound();
+        if (inputX != 0) PlayStepsSound(); // шаги
+
+        /*if (useStair)
+        {
+            if (inputY != 0) PlayLadderSound(); // лестница лучше не включать..
+            else audioSource.Stop();
+        }*/
     }
 
     private void OnTriggerStay(Collider other)
