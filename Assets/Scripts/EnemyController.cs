@@ -82,13 +82,13 @@ public class EnemyController : MonoBehaviour
       
     void OnTriggerStay (Collider  other)
 	{
-        if(other.gameObject.CompareTag("ladder"))
+        if(other.gameObject.CompareTag("ladder") && !harassment)
         {
             if (!already){
                 chanse = Random.Range(0,100);
                 already = true;
             } 
-            if (chanse <= chanseClimbing){
+            if (chanse <= chanseClimbing ){
                 //rb.isKinematic = true; 
                 ladderPos = other.transform.position;
                 if (up == 8){
@@ -99,6 +99,8 @@ public class EnemyController : MonoBehaviour
                 }
                 climbing = true;
                 rb.velocity = new Vector3(0,speed*up, 0);
+                if (tr.position.x != ladderPos.x)
+                    tr.position = Vector3.MoveTowards(tr.position, new Vector3(ladderPos.x, tr.position.y, tr.position.z), speed * Time.fixedDeltaTime);                
             }
         } 
     }
@@ -120,6 +122,7 @@ public class EnemyController : MonoBehaviour
 	{
         if(other.gameObject.CompareTag("ladder"))
         {
+            Debug.Log("Loh");
             //rb.isKinematic = false;
             climbing = false;
             StartPosition = tr.position;
