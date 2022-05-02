@@ -1462,6 +1462,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f2591f67afbf2542bd3ff14779bba9b, type: 3}
   - {fileID: 8300000, guid: 04f7742fff424e94e880876926337d6e, type: 3}
   - {fileID: 8300000, guid: 27005bc65d41cdb4298425efb35484ca, type: 3}
+  dayMusic: {fileID: 8300000, guid: fae05927dc42aeb4582af672078908bd, type: 3}
+  nightMusic: {fileID: 8300000, guid: 5da7cb26fe9ecb24e9d0885d5098b351, type: 3}
 --- !u!4 &1310539910
 Transform:
   m_ObjectHideFlags: 0
