@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     [SerializeField] private ParticleSystem bangPS;
+    [SerializeField] private AudioSource audioSource;
+
     private Rigidbody bombRB;
     private Vector3 throwDirection;
     private float force;
@@ -23,6 +25,7 @@ public class Bomb : MonoBehaviour
     {
         var bang = Instantiate(bangPS, gameObject.transform.position, bangPS.transform.rotation);
         bang.Play();
+
         Destroy(gameObject);
     }
 }
