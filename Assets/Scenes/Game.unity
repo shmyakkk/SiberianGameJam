@@ -816,7 +816,7 @@ RectTransform:
   - {fileID: 778374215}
   - {fileID: 1803851931}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1011,7 +1011,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &705507996
 MonoBehaviour:
@@ -1766,7 +1766,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1509406541
 GameObject:
@@ -1796,7 +1796,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1575265835
 GameObject:
@@ -2625,7 +2625,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a728c4741bc30484ebcf75c37780478c, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a728c4741bc30484ebcf75c37780478c, type: 3}
       propertyPath: m_LocalScale.x
@@ -2685,7 +2685,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 851cf17a6bf3f8d4497c586af00da34c, type: 2}
     - target: {fileID: 919132149155446097, guid: a728c4741bc30484ebcf75c37780478c, type: 3}
       propertyPath: m_Name
-      value: babka4
+      value: BABKA
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a728c4741bc30484ebcf75c37780478c, type: 3}
       propertyPath: m_TagString
@@ -2869,8 +2869,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   audioSource: {fileID: 2000671070}
-  steps: []
-  stepsNight: []
+  steps:
+  - {fileID: 8300000, guid: aaa82ec7492a6d64bb4d15cb12797023, type: 3}
+  - {fileID: 8300000, guid: 0a4a293de08a865469bb5006092e57d0, type: 3}
+  - {fileID: 8300000, guid: d8a4f53017661784aa033a5136260117, type: 3}
+  - {fileID: 8300000, guid: e1154ac0a28600349a6b95b2fd210860, type: 3}
+  - {fileID: 8300000, guid: 60bcdb81342fc0b4eb17419be6ddb7cb, type: 3}
+  - {fileID: 8300000, guid: 30f47dfef0a04a3458ed8f6bc52c0cec, type: 3}
+  - {fileID: 8300000, guid: 3f0ccd13455a34d4da144497d577d8a7, type: 3}
+  - {fileID: 8300000, guid: 7b1f1ccc4df7c1f4a9ee2f9f447f63fd, type: 3}
+  stepsNight:
+  - {fileID: 8300000, guid: c89d494f22cac7b4a83b2fdc750980c5, type: 3}
+  - {fileID: 8300000, guid: 9d325535ecb793347b65a0ca3fc9dc07, type: 3}
+  - {fileID: 8300000, guid: ee2b539569340f6489d1c909532756f0, type: 3}
+  - {fileID: 8300000, guid: d69f0d84fa4a9504384020a81a5541d7, type: 3}
+  - {fileID: 8300000, guid: 80107bef250e659458889df50a6e0caa, type: 3}
+  - {fileID: 8300000, guid: e96b7ce5909e89643a23fcbf3ba05bb6, type: 3}
+  - {fileID: 8300000, guid: cd578c71bfa04c742944821b0c67d0dd, type: 3}
+  - {fileID: 8300000, guid: 59f657027b535db48a959930b490d1e2, type: 3}
   ladder: {fileID: 8300000, guid: 9cba58e1bc0eeba469fe7984000aff40, type: 3}
   ladderNight: {fileID: 8300000, guid: 3ecb1065e9256db49adc632b5b9fc98b, type: 3}
 --- !u!1 &2045686014
@@ -2937,7 +2953,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2088389439
 GameObject:
