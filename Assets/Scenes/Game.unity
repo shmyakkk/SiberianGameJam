@@ -1280,7 +1280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2000671065}
-  distanceFromPlayer: {x: 0, y: 3, z: -10}
+  distanceFromPlayer: {x: 0, y: 3, z: -5}
 --- !u!1 &1014482944
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,7 +2641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a728c4741bc30484ebcf75c37780478c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7092009
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a728c4741bc30484ebcf75c37780478c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2649,7 +2649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a728c4741bc30484ebcf75c37780478c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2325068
+      value: -0.56
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a728c4741bc30484ebcf75c37780478c, type: 3}
       propertyPath: m_LocalRotation.w

@@ -148,7 +148,6 @@ public class EnemyController : MonoBehaviour
 	{
         if(other.gameObject.CompareTag("ladder"))
         {
-            Debug.Log("Loh");
             climbing = false;
             StartPosition = tr.position;
             StartCoroutine(Waiting(2));
