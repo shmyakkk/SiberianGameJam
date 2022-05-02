@@ -23,6 +23,10 @@ public class Bomb : MonoBehaviour
     {
         var bang = Instantiate(bangPS, gameObject.transform.position, bangPS.transform.rotation);
         bang.Play();
+
+
+        EnemyController.BombCoord = transform.position;
+        
         Destroy(gameObject);
     }
 }

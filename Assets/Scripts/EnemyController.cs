@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     public static Vector3 BombCoord;
     private float chanse = 0;
     private Vector3 rotationVector;
+    private bool Boom;
 
     void Start()
     {
@@ -31,13 +32,49 @@ public class EnemyController : MonoBehaviour
             dir = -1;
             tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
         }
+
+        BombCoord.z = -1000;
     }
     void FixedUpdate()
     {
         Enemy_move();
+        if (BombCoord.z != -1000){
+            Debug.Log(BombCoord);
+
+            Boom_go();
+        }
+    }
+    void Boom_go(){
+        var d = BombCoord - tr.position;
+        if (!harassment)
+            if (d.magnitude < VisionFace && Mathf.Abs(BombCoord.y - tr.position.y) <= VertVision){
+                if (tr.rotation.eulerAngles.y == 90 && (BombCoord.x < tr.position.x)){
+                    Boom = true;
+                } else if(BombCoord.x > tr.position.x && tr.position.x - BombCoord.x <= VisionBack){
+                    tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
+                    Boom = true;
+                } else if(tr.rotation.eulerAngles.y == -90 && (BombCoord.x > tr.position.x)){
+                        Boom = true;
+                    }else if (BombCoord.x < tr.position.x && BombCoord.x - tr.position.x <= VisionBack){
+                        tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
+                        Boom = true;
+                    }
+                if (Boom){
+                    tr.position = Vector3.MoveTowards(tr.position, BombCoord, speed * Time.fixedDeltaTime);
+                }
+            }
+            if (Mathf.Abs(tr.position.x - BombCoord.x) <= 0.05f){
+                StartCoroutine(Look_at_Boom(2));
+            }
+    }
+    IEnumerator Look_at_Boom(int waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        Boom = false;
+        BombCoord.z = -1000;
     }
     void Enemy_move(){
-        if (!harassment && !climbing){
+        if (!harassment && !climbing && !Boom){
             
                 rb.velocity = new Vector3(speed*dir, 0, 0);
 
