@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035156, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &207396238
@@ -1666,6 +1666,7 @@ GameObject:
   - component: {fileID: 1640349285}
   - component: {fileID: 1640349290}
   - component: {fileID: 1640349289}
+  - component: {fileID: 1640349291}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1743,7 +1744,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640349284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.57, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1761,6 +1762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b12464dd4a984458aea4fca7e2926a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
 --- !u!54 &1640349290
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1777,6 +1779,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &1640349291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640349284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279fcd80f096cd246a8216a403e23ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bomb: {fileID: 1341919079348870486, guid: dd362106542be3a419da012c3ff970c2, type: 3}
 --- !u!1 &1692154094
 GameObject:
   m_ObjectHideFlags: 0
@@ -1855,10 +1870,10 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 60, y: 60}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1770797598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2045,8 +2060,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 7.4494457}
-  m_Center: {x: 0, y: 0, z: -3.2247229}
+  m_Size: {x: 1, y: 1, z: 8}
+  m_Center: {x: 0, y: 0, z: -3}
 --- !u!23 &1876391700
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2145,10 +2160,10 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -350, y: -137.96819}
-  m_SizeDelta: {x: -739.99994, y: -315.93643}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 10, y: 10}
+  m_SizeDelta: {x: 70, y: 70}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1934411236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,9 +2214,10 @@ GameObject:
   - component: {fileID: 1953997807}
   - component: {fileID: 1953997806}
   - component: {fileID: 1953997805}
+  - component: {fileID: 1953997809}
   m_Layer: 0
   m_Name: Down
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2282,6 +2298,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1953997809
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953997804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.3050025, z: 1}
+  m_Center: {x: 0, y: 0.10749998, z: 0}
 --- !u!1 &2045686014
 GameObject:
   m_ObjectHideFlags: 0
@@ -2600,6 +2629,10 @@ PrefabInstance:
     - target: {fileID: 8310891003641196039, guid: c7fdc389c6ccf8d4aabc20157f22fa2b, type: 3}
       propertyPath: m_Name
       value: Down (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310891003641196039, guid: c7fdc389c6ccf8d4aabc20157f22fa2b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 8310891003641196059, guid: c7fdc389c6ccf8d4aabc20157f22fa2b, type: 3}
       propertyPath: m_RootOrder
