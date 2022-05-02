@@ -841,8 +841,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773451393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.89, y: -0.14, z: -1.14}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -11.03, y: 0.341, z: -1.14}
+  m_LocalScale: {x: 1, y: 1.962, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -876,6 +876,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  audioSource: {fileID: 0}
+  steps: []
+  stepsNight: []
+  ladder: {fileID: 0}
+  ladderNight: {fileID: 0}
 --- !u!114 &1773451400
 MonoBehaviour:
   m_ObjectHideFlags: 0
