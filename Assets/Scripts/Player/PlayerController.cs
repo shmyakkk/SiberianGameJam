@@ -14,7 +14,11 @@ public class PlayerController : MonoBehaviour
     private float holdTime = 0;
 
     private bool isStair = false;
+    private bool availableThrow = true;
+
+    private void Start() => GlobalEventManager.OnEnterQ.AddListener(AvailableThrow);
     private void Update() => ThrowBomb();
+
     private void FixedUpdate()
     {
         PlayerMoveX();
@@ -25,32 +29,10 @@ public class PlayerController : MonoBehaviour
         inputX = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
         gameObject.transform.Translate(speed * Time.deltaTime * inputX);
     }
-
     private void PlayerMoveY()
     {
         if (isStair) inputY = new Vector3(0, Input.GetAxis("Vertical"), 0);
         gameObject.transform.Translate(speed * Time.deltaTime * inputY);
-    }
-
-    private void ThrowBomb()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            startTime = Time.time;
-        }
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            holdTime = Time.time - startTime;
-
-            var force = holdTime * 12;
-            if (force > 10) force = 10;
-
-            var currentBomb = Instantiate(bomb, gameObject.transform.position + Vector3.right, bomb.transform.rotation);
-            currentBomb.GetComponent<Bomb>().Force = force;
-
-            startTime = 0;
-            holdTime = 0;
-        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -69,5 +51,44 @@ public class PlayerController : MonoBehaviour
             isStair = false;
             GetComponent<Rigidbody>().useGravity = true;
         }
+    }
+
+    private void ThrowBomb()
+    {
+        if (availableThrow)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                startTime = Time.time;
+            }
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                holdTime = Time.time - startTime;
+
+                var force = holdTime * 12;
+                if (force > 10) force = 10;
+
+                var currentBomb = Instantiate(bomb, gameObject.transform.position + Vector3.right, bomb.transform.rotation);
+                currentBomb.GetComponent<Bomb>().Force = force;
+
+                startTime = 0;
+                holdTime = 0;
+
+                GlobalEventManager.SendEnterQ();
+            }
+        }
+    }
+
+    private void AvailableThrow()
+    {
+        availableThrow = false;
+        StartCoroutine(AvailableThrowTime());
+    }
+
+    private IEnumerator AvailableThrowTime()
+    {
+        yield return new WaitForSeconds(10);
+        availableThrow = true;
+        GlobalEventManager.SendRestartQ();
     }
 }
