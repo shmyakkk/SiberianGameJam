@@ -89,6 +89,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(10);
         availableThrow = true;
-        GlobalEventManager.SendRestartQ();
+        GlobalEventManager.SendReloadQ();
     }
 }
