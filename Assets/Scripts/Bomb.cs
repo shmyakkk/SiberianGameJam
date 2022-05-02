@@ -9,7 +9,7 @@ public class Bomb : MonoBehaviour
     private Vector3 throwDirection;
     private float force;
 
-    public float Force { get => force; set => force = value; }
+    public float Force { get => force; set => force = value; } 
 
     private void Start()
     {
@@ -23,6 +23,9 @@ public class Bomb : MonoBehaviour
     {
         var bang = Instantiate(bangPS, gameObject.transform.position, bangPS.transform.rotation);
         bang.Play();
+
+        EnemyController.BombCoord = transform.position;
+
         Destroy(gameObject);
     }
 }
