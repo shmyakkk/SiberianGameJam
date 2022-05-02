@@ -6,28 +6,27 @@ using UnityEngine.UI;
 public class Q : MonoBehaviour
 {
     private Image bar;
-    private bool available = false;
+    private bool isEnter = false;
 
     public float WaitTime { get; set; } = 10f;
 
     private void Start()
     {
-        GlobalEventManager.OnEnterQ.AddListener(SetAvailable);
-        GlobalEventManager.OnRestartQ.AddListener(RestartQ);
+        GlobalEventManager.OnEnterQ.AddListener(EnterQ);
+        GlobalEventManager.OnReloadQ.AddListener(ReloadQ);
 
         bar = GetComponent<Image>();
         bar.fillAmount = 0;
     }
     private void Update()
     {
-        if (available) MoveImage();
+        if (isEnter) MoveImage();
     }
     private void MoveImage() => bar.fillAmount -= 1.0f / WaitTime * Time.deltaTime;
-    private void SetAvailable()
+    private void EnterQ()
     {
         bar.fillAmount = 1;
-        available = true;
+        isEnter = true;
     }
-
-    private void RestartQ() => available = false;
+    private void ReloadQ() => isEnter = false;
 }
