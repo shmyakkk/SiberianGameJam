@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private List<AudioClip> stepsNight;
     [SerializeField] private AudioClip ladder;
     [SerializeField] private AudioClip ladderNight;
+    [SerializeField] private AudioClip voiceInsane;
 
     private Rigidbody playerRB;
     private PlayerThrow playerThrow;
