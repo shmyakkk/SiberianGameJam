@@ -317,7 +317,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b12464dd4a984458aea4fca7e2926a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2
+  audioSource: {fileID: 0}
+  steps: []
+  nightSteps: []
 --- !u!65 &301803324
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -347,6 +350,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!95 &301803327
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301803321}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d98f664c568b13541808d99f8c17f0e6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &320514073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,7 +2031,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD
   - component: {fileID: 1661474435}
   - component: {fileID: 1661474437}
   - component: {fileID: 1661474436}
@@ -2017,19 +2038,6 @@ GameObject:
   m_Layer: 5
   m_Name: FuelBar
   m_TagString: Untagged
-=======
-  - component: {fileID: 1640349288}
-  - component: {fileID: 1640349287}
-  - component: {fileID: 1640349286}
-  - component: {fileID: 1640349285}
-  - component: {fileID: 1640349290}
-  - component: {fileID: 1640349289}
-  - component: {fileID: 1640349291}
-  - component: {fileID: 1640349292}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
->>>>>>> d38d50dd229db414f09a45585e2156451f8f39e5
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2065,7 +2073,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   m_Material: {fileID: 0}
   m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
   m_RaycastTarget: 1
@@ -2086,30 +2093,6 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1661474437
 CanvasRenderer:
-=======
-  speed: 3
-  audioSource: {fileID: 1640349292}
-  steps:
-  - {fileID: 8300000, guid: 560dc4fe612bf0d4bb6b569b8dd59d7d, type: 3}
-  - {fileID: 8300000, guid: 1f0ac02dd715555419ee018b2b870722, type: 3}
-  - {fileID: 8300000, guid: 77cd0d878eb0078479585317220189c3, type: 3}
-  - {fileID: 8300000, guid: 8867a4ba06b33d8489d68d4986ab99af, type: 3}
-  - {fileID: 8300000, guid: 0b4b718b37ce99e4e9c939233c990977, type: 3}
-  - {fileID: 8300000, guid: 4f8a49a087ee9e54e8758a79444499ca, type: 3}
-  - {fileID: 8300000, guid: 3e382186a41e35d47a835ac130466696, type: 3}
-  - {fileID: 8300000, guid: c7c7a25d86accbe41b041f4197ab7eec, type: 3}
-  nightSteps:
-  - {fileID: 8300000, guid: c89d494f22cac7b4a83b2fdc750980c5, type: 3}
-  - {fileID: 8300000, guid: 9d325535ecb793347b65a0ca3fc9dc07, type: 3}
-  - {fileID: 8300000, guid: ee2b539569340f6489d1c909532756f0, type: 3}
-  - {fileID: 8300000, guid: d69f0d84fa4a9504384020a81a5541d7, type: 3}
-  - {fileID: 8300000, guid: 80107bef250e659458889df50a6e0caa, type: 3}
-  - {fileID: 8300000, guid: e96b7ce5909e89643a23fcbf3ba05bb6, type: 3}
-  - {fileID: 8300000, guid: cd578c71bfa04c742944821b0c67d0dd, type: 3}
-  - {fileID: 8300000, guid: 59f657027b535db48a959930b490d1e2, type: 3}
---- !u!54 &1640349290
-Rigidbody:
->>>>>>> d38d50dd229db414f09a45585e2156451f8f39e5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2128,107 +2111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b20880ac542ef14e92a4de8c126f4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
   fuel: 0
-=======
-  bomb: {fileID: 1341919079348870486, guid: dd362106542be3a419da012c3ff970c2, type: 3}
---- !u!82 &1640349292
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640349284}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 0.65
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
->>>>>>> d38d50dd229db414f09a45585e2156451f8f39e5
 --- !u!1 &1692154094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,8 +2445,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 8}
-  m_Center: {x: 0, y: 0, z: -3}
+  m_Size: {x: 1, y: 0.853938, z: 8}
+  m_Center: {x: 0, y: -0.07303158, z: -2.9999998}
 --- !u!23 &1876391700
 MeshRenderer:
   m_ObjectHideFlags: 0
