@@ -118,6 +118,7 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+    
     void OnTriggerExit (Collider  other)
 	{
         if(other.gameObject.CompareTag("ladder"))
