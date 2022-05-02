@@ -11,13 +11,21 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField]private GameObject Player;
 
-    [SerializeField] private bool StartToTheRight;
+    [SerializeField] private bool ToTheRight;
 
     [SerializeField] private float speed,Patrol_distans,DistanseOfVision, chanseClimbing;
 
-    private bool harassment = false, climbing = false, already = false;
+    private bool climbing = false, already = false;
+
+    [SerializeField]private bool harassment = false;
 
     private Vector3 upLadder, downLadder, ladderPos, StartPosition;
+
+    int dir = 1, up = 8;
+
+    float StartSpeed;
+
+    float chanse = 0;
 
     void Start()
     {
@@ -26,13 +34,11 @@ public class EnemyController : MonoBehaviour
 
         StartPosition = tr.position;
 
-        if (StartToTheRight){
-            tr.Translate(new Vector3(speed,0,0) * Time.deltaTime);
-            Debug.Log("1");
+        if (ToTheRight){
+            dir = 1;
         }
         else{
-            tr.Translate(new Vector3(-speed,0,0) * Time.deltaTime);
-            Debug.Log("2");
+            dir = -1;
         }
     }
 
@@ -43,73 +49,92 @@ public class EnemyController : MonoBehaviour
     }
 
     void Enemy_move(){
-        if (!harassment && !climbing){
 
-            if( tr.position.x > Patrol_distans + StartPosition.x)
-            {
-                Debug.Log("3");
-                
-                tr.Translate(new Vector3(speed,0,0) * Time.deltaTime);
+        if (!harassment && !climbing){
+            rb.velocity = new Vector3(speed*dir, 0, 0);
+
+            if (tr.position.x >= Patrol_distans + StartPosition.x){
+                dir = -1;
             }
-            else
-                if(tr.position.x < StartPosition.x - Patrol_distans)
-                {
-                    Debug.Log("4");
-                    tr.Translate(new Vector3(-speed,0,0) * Time.deltaTime);
-                }
+            if (tr.position.x <= StartPosition.x - Patrol_distans){
+                dir = 1;
+            }
+
         }
 
         var S = Player.transform.position - tr.position;
-        if(S.sqrMagnitude < DistanseOfVision*DistanseOfVision)
+        if(S.magnitude < DistanseOfVision)
         {
             harassment = true;
 
-            tr.LookAt(Player.transform);
-
-            tr.position = Vector3.MoveTowards(tr.position, Player.transform.position, speed * Time.deltaTime);
+            tr.position = Vector3.MoveTowards(tr.position, Player.transform.position, speed * Time.fixedDeltaTime);
         }
         else{
             harassment = false;
         }
+
     }
 
+    void LadderMove(){
+        rb.isKinematic = true;
+        rb.velocity = new Vector3(rb.position.x, up * speed,0);
+    }
+      
     void OnTriggerStay (Collider  other)
 	{
-        if(other.gameObject.CompareTag("ladder") && !already)
+        if(other.gameObject.CompareTag("ladder"))
         {
-           
-            
-            float chanse = Random.Range(0,100);
-            already = true;
-
-            if (chanse <= (chanseClimbing)){
-                climbing = true; 
-                Ladder ladder = other.GetComponent<Ladder>();
-                upLadder = ladder.up.position;
-                downLadder = ladder.down.position;
+            if (!already){
+                chanse = Random.Range(0,100);
+                already = true;
+            } 
+            if (chanse <= chanseClimbing){
+                //rb.isKinematic = true; 
                 ladderPos = other.transform.position;
-
-                int up = -1;
-                if(tr.position.y < upLadder.y+5)
-		        {
-			        up = 1;
-		        }
-
-                rb.isKinematic = true;
-		        tr.Translate(new Vector2(0, speed * up * Time.fixedDeltaTime));
+                if (up == 8){
+                    if(tr.position.y < ladderPos.y && !climbing)
+                        up = 1;
+                    else
+                        up = -1;
+                }
+                climbing = true;
+                rb.velocity = new Vector3(0,speed*up, 0);
             }
-
-        }
+        } 
     }
 
+    void OnTriggerEnter(Collider other){
+        if(other.gameObject.CompareTag("Ground")){
+            if(up == -1){
+                //rb.isKinematic = false;
+                climbing = false;
+                StartPosition = tr.position;
+                ToTheRight = true;
+                chanse = 101;
+                Enemy_move();
+                StartCoroutine(Waiting(2));
+            }
+        }
+    }
     void OnTriggerExit (Collider  other)
 	{
         if(other.gameObject.CompareTag("ladder"))
         {
+            //rb.isKinematic = false;
             climbing = false;
-            rb.isKinematic = false;
-            already = false;
-            tr.Translate(new Vector3(speed,0,0) * Time.deltaTime);
+            StartPosition = tr.position;
+            StartCoroutine(Waiting(2));
+            Enemy_move();   
+
         }
     }
+
+    IEnumerator Waiting(int waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        rb.isKinematic = false;
+        already = false;
+        up = 8;
+
+    }    
 }
