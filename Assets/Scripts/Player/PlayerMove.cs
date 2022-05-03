@@ -62,11 +62,11 @@ public class PlayerMove : MonoBehaviour
         if (isStair) inputY = Input.GetAxis("Vertical");
 
         Vector3 directionVector = new Vector3(inputX, inputY, 0);
-        Vector3 rotationVector = new Vector3(-inputX, 0, 0);
+        Vector3 rotationVector = new Vector3(inputX, 0, 0);
 
         if (inputY != 0 && isStair)
         {
-            rotationVector = Vector3.back;
+            rotationVector = Vector3.forward;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(stairPos.x, transform.position.y, transform.position.z), 3 * Time.deltaTime);
         }
 
