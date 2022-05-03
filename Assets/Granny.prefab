@@ -678,6 +678,7 @@ GameObject:
   - component: {fileID: 5568306982494659684}
   - component: {fileID: 5568306982494659685}
   - component: {fileID: 5568306982494659687}
+  - component: {fileID: 7144231845156177110}
   m_Layer: 0
   m_Name: Granny
   m_TagString: Player
@@ -893,6 +894,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 59f657027b535db48a959930b490d1e2, type: 3}
   ladder: {fileID: 8300000, guid: 9cba58e1bc0eeba469fe7984000aff40, type: 3}
   ladderNight: {fileID: 8300000, guid: 3ecb1065e9256db49adc632b5b9fc98b, type: 3}
+--- !u!65 &7144231845156177110
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722007043117340977}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.64, y: 1.17, z: 0.5441189}
+  m_Center: {x: 0, y: 0.59, z: 0.1116657}
 --- !u!1 &4743214573877955923
 GameObject:
   m_ObjectHideFlags: 0

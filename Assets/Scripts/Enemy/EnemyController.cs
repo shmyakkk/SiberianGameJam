@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -23,15 +24,18 @@ public class EnemyController : MonoBehaviour
 
         tr = gameObject.GetComponent<Transform>();
         rb = gameObject.GetComponent<Rigidbody>();
+        tr.position = new Vector3(tr.position.x,tr.position.y,-1.61f);
 
         StartPosition = tr.position;
         if (ToTheRight){
             dir = 1;
-            tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
+            tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
+            tr.position = new Vector3(tr.position.x,tr.position.y,-1.61f);
         }
         else{
             dir = -1;
-            tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
+            tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
+            tr.position = new Vector3(tr.position.x,tr.position.y,-1.61f);
         }
 
         BombCoord.z = -1000;
@@ -49,15 +53,17 @@ public class EnemyController : MonoBehaviour
         var d = BombCoord - tr.position;
         if (!harassment)
             if (d.magnitude < VisionFace && Mathf.Abs(BombCoord.y - tr.position.y) <= VertVision){
-                if (tr.rotation.eulerAngles.y == 90 && (BombCoord.x < tr.position.x)){
+                if (tr.rotation.eulerAngles.y == -90 && (BombCoord.x < tr.position.x)){
                     Boom = true;
                 } else if(BombCoord.x > tr.position.x && tr.position.x - BombCoord.x <= VisionBack){
-                    tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
+                    tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
+                    tr.position = new Vector3(tr.position.x,tr.position.y,-1.61f);
                     Boom = true;
-                } else if(tr.rotation.eulerAngles.y == -90 && (BombCoord.x > tr.position.x)){
+                } else if(tr.rotation.eulerAngles.y == 90 && (BombCoord.x > tr.position.x)){
                         Boom = true;
                     }else if (BombCoord.x < tr.position.x && BombCoord.x - tr.position.x <= VisionBack){
-                        tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
+                        tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
+                        tr.position = new Vector3(tr.position.x,tr.position.y,-1.61f);
                         Boom = true;
                     }
                 if (Boom){
@@ -81,25 +87,29 @@ public class EnemyController : MonoBehaviour
 
             if (tr.position.x >= Patrol_distans + StartPosition.x){
                 dir = -1;
-                tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
+                tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
+                tr.position =new Vector3(tr.position.x,tr.position.y,StartPosition.z);
             }
             if (tr.position.x <= StartPosition.x - Patrol_distans){
                 dir = 1;
-               tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
+               tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
+               tr.position = new Vector3(tr.position.x,tr.position.y,-1.61f);
             }
         }
         var S = Player.transform.position - tr.position;
         if(S.magnitude < VisionFace && Mathf.Abs(Player.transform.position.y - tr.position.y) <= VertVision)
         {
-            if (tr.rotation.eulerAngles.y == 90 && (Player.transform.position.x < tr.position.x)){
+            if (tr.rotation.eulerAngles.y == -90 && (Player.transform.position.x < tr.position.x)){
                 harassment = true;
             } else if(Player.transform.position.x > tr.position.x && tr.position.x - Player.transform.position.x <= VisionBack){
-                tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
+                tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
+                tr.position = new Vector3(tr.position.x,tr.position.y,-1.61f);
                 harassment = true;
-            } else if(tr.rotation.eulerAngles.y == -90 && (Player.transform.position.x > tr.position.x)){
+            } else if(tr.rotation.eulerAngles.y == 90 && (Player.transform.position.x > tr.position.x)){
                     harassment = true;
                 }else if (Player.transform.position.x < tr.position.x && Player.transform.position.x - tr.position.x <= VisionBack){
-                    tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,90, transform.rotation.eulerAngles.z);
+                    tr.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,-90, transform.rotation.eulerAngles.z);
+                    tr.position = new Vector3(tr.position.x,tr.position.y,-1.61f);
                     harassment = true;
                 }
             if (harassment)
@@ -148,6 +158,9 @@ public class EnemyController : MonoBehaviour
             Spawn();
             ForPlayerB.GetComponent<StressBar>().CurrentValue += 30;
             Destroy(gameObject);
+        }
+        if (other.gameObject.CompareTag("Player")){
+            SceneManager.LoadScene("Game");
         }
     }
     void Spawn(){

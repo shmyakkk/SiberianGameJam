@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 1251155007012367358}
   - component: {fileID: 1148781773486162345}
   - component: {fileID: 554469708234103527}
+  - component: {fileID: -8560871115932814887}
   m_Layer: 0
   m_Name: tapok
-  m_TagString: Untagged
+  m_TagString: tapok
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,3 +226,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &-8560871115932814887
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752157648622217478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0033337139
+  m_Center: {x: -0.0010198865, y: 1.164153e-10, z: -0.00059576065}
