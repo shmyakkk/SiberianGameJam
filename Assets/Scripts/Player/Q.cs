@@ -29,4 +29,5 @@ public class Q : MonoBehaviour
         isEnter = true;
     }
     private void ReloadQ() => isEnter = false;
+
 }
