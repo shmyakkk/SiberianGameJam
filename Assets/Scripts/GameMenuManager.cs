@@ -6,7 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
-
+    [SerializeField] private GameObject q;
+    private void Start()
+    {
+        GlobalEventManager.OnStartedDay.AddListener(QDay);
+        GlobalEventManager.OnStartedNight.AddListener(QNight);
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) PauseUnpause();
@@ -25,4 +30,7 @@ public class GameMenuManager : MonoBehaviour
         }
     }
     public void ToMainMenu() => SceneManager.LoadScene("MainMenu");
+
+    private void QDay() => q.SetActive(false);
+    private void QNight() => q.SetActive(true);
 }
