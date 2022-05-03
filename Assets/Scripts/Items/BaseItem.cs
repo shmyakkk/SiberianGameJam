@@ -6,7 +6,7 @@ public abstract class BaseItem : MonoBehaviour
 {
     public bool Available { get; set; } = true;
 
-    private void Awake() => SetBoxCollider();
+    //private void Awake() => SetBoxCollider();
 
     private void SetBoxCollider()
     {

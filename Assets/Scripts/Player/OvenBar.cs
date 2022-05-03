@@ -5,25 +5,23 @@ using UnityEngine.UI;
 
 public class OvenBar : PlayerBars
 {
-    public static float fuel = 0f;
     void Start()
     {
         SetDefaultValue();
         StartCoroutine(IncreaseFuel());
+        CurrentValue = MaxValue;
     }
-
 
     void Update()
     {
-        bar.fillAmount = fuel;
+        bar.fillAmount = CurrentValue / MaxValue;
     }
     private IEnumerator IncreaseFuel()
     {
-        while (fuel <= 1f)
+        while (CurrentValue < MaxValue)
         {
-            yield return new WaitForSeconds(1);
-            fuel += 0.02f;
-            Debug.Log(fuel);
+            yield return new WaitForSeconds(5);
+            CurrentValue -= 5f;
         }
     }
 }
