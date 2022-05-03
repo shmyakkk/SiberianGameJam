@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 4d4ee5337ea901b4ea4ad500c3547f84
+guid: a879486730787cd478c799daead17185
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
+      74: -887982601649841707
+    second: metarig|metarigAction
+  - first:
       74: -4544823380048006326
     second: metarig|metarigAction.003
-  - first:
-      74: 1997651898365675378
-    second: metarig|metarigAction.003 (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -38,8 +38,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: metarig|metarigAction.003
-      takeName: metarig|metarigAction.003
+      name: metarig|metarigAction
+      takeName: metarig|metarigAction
       internalID: 0
       firstFrame: 0
       lastFrame: 39
@@ -67,11 +67,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: metarig|metarigAction.003 (1)
+      name: metarig|metarigAction.003
       takeName: metarig|metarigAction.003
       internalID: 0
       firstFrame: 0
-      lastFrame: 39
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

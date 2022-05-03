@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [Header("Animation")]
+    [SerializeField] private Animator playerAnim;
+    [Header(" ")]
     [SerializeField] private float speed = 3f;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private List<AudioClip> steps;
@@ -70,15 +73,28 @@ public class PlayerMove : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(stairPos.x, transform.position.y, transform.position.z), 3 * Time.deltaTime);
         }
 
-        if (inputX > 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Right;
-        if (inputX < 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Left;
+        if (!isDay)
+        {
+            if (inputX > 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Right;
+            if (inputX < 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Left;
+        }
 
         if (directionVector.magnitude > Mathf.Abs(0.1f))
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotationVector), Time.deltaTime * 10);
 
         playerRB.velocity = directionVector * speed;
 
-        if (inputX != 0) PlayStepsSound(); // ���� <-- Шо это?  ento russciy yzic
+        if (inputX != 0)
+        {
+            playerAnim.speed = 1;
+            playerAnim.Play("Move");
+            PlayStepsSound(); // ���� <-- Шо это?  ento russciy yzic
+        }
+        else
+        {
+            playerAnim.speed = 0;
+            playerAnim.Play("Stay");
+        }
 
         /*if (useStair)
         {
@@ -86,6 +102,7 @@ public class PlayerMove : MonoBehaviour
             else audioSource.Stop();
         }*/
     }
+
 
     private void OnTriggerStay(Collider other)
     {

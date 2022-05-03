@@ -1059,7 +1059,6 @@ GameObject:
   - component: {fileID: 1908130660023811002}
   - component: {fileID: 7391714359796391246}
   - component: {fileID: 6063059660757845283}
-  - component: {fileID: 2216012142860569115}
   - component: {fileID: 3673675045925549798}
   - component: {fileID: 6050624940175601666}
   m_Layer: 0
@@ -1210,19 +1209,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2216012142860569115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6717936008797026618}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279fcd80f096cd246a8216a403e23ab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bomb: {fileID: 1341919079348870486, guid: dd362106542be3a419da012c3ff970c2, type: 3}
 --- !u!114 &3673675045925549798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,6 +1221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b12464dd4a984458aea4fca7e2926a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnim: {fileID: 0}
   speed: 5
   audioSource: {fileID: 5568306982494659686, guid: 6eb3ef4ad0ccf85499adb9f34193e693, type: 3}
   steps:
