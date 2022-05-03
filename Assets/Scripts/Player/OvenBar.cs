@@ -23,7 +23,7 @@ public class OvenBar : PlayerBars
         {
             yield return new WaitForSeconds(1);
             fuel += 0.02f;
-            //Debug.Log(fuel);
+            Debug.Log(fuel);
         }
     }
 }
