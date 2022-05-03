@@ -78,11 +78,11 @@ public class PlayerMove : MonoBehaviour
 
         playerRB.velocity = directionVector * speed;
 
-        if (inputX != 0) PlayStepsSound(); // ���� <-- Шо это?
+        if (inputX != 0) PlayStepsSound(); // ���� <-- Шо это?  ento russciy yzic
 
         /*if (useStair)
         {
-            if (inputY != 0) PlayLadderSound(); // �������� ����� �� ��������..  <-- И это???
+            if (inputY != 0) PlayLadderSound(); // �������� ����� �� ��������..  <-- И это??? i ento toze
             else audioSource.Stop();
         }*/
     }
