@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private List<AudioClip> stepsNight;
     [SerializeField] private AudioClip ladder;
     [SerializeField] private AudioClip ladderNight;
-    //[SerializeField] private AudioClip voiceInsane;
+    [SerializeField] private AudioClip voiceInsane;
 
     private Rigidbody playerRB;
     private PlayerThrow playerThrow;
@@ -65,11 +65,11 @@ public class PlayerMove : MonoBehaviour
         if (isStair) inputY = Input.GetAxis("Vertical");
 
         Vector3 directionVector = new Vector3(inputX, inputY, 0);
-        Vector3 rotationVector = new Vector3(inputX, 0, 0);
+        Vector3 rotationVector = new Vector3(-inputX, 0, 0);
 
         if (inputY != 0 && isStair)
         {
-            rotationVector = Vector3.forward;
+            rotationVector = Vector3.back;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(stairPos.x, transform.position.y, transform.position.z), 3 * Time.deltaTime);
         }
 
@@ -84,6 +84,7 @@ public class PlayerMove : MonoBehaviour
 
         playerRB.velocity = directionVector * speed;
 
+<<<<<<< HEAD
         if (inputX != 0)
         {
             playerAnim.speed = 1;
@@ -99,6 +100,13 @@ public class PlayerMove : MonoBehaviour
         /*if (useStair)
         {
             if (inputY != 0) PlayLadderSound(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ..  <-- Р СЌС‚Рѕ??? i ento toze
+=======
+        if (inputX != 0) PlayStepsSound(); // шаги
+
+        /*if (useStair)
+        {
+            if (inputY != 0) PlayLadderSound(); // лестница лучше не включать..
+>>>>>>> parent of 989d8c8 (Merge branch 'main' of https://github.com/shmyakkk/SiberianGameJam)
             else audioSource.Stop();
         }*/
     }
@@ -124,6 +132,7 @@ public class PlayerMove : MonoBehaviour
             useStair = true;
             playerThrow.CurrentState = PlayerThrow.ThrowStates.Disabled;
         }
+
         if (other.CompareTag("Stair"))
         {
             isStair = false;
