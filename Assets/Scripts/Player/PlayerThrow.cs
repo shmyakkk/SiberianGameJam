@@ -30,6 +30,7 @@ public class PlayerThrow : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                Debug.Log("q");
                 startTime = Time.time;
             }
             if (Input.GetKeyUp(KeyCode.Q))
@@ -51,8 +52,6 @@ public class PlayerThrow : MonoBehaviour
                     position = new Vector3(1.5f, 2, 0);
                 }
 
-                Debug.Log(position);
-
                 var currentBomb = Instantiate(bomb, gameObject.transform.position + position, bomb.transform.rotation);
                 currentBomb.GetComponent<Bomb>().Force = force;
                 currentBomb.GetComponent<Bomb>().ThrowDirection = direction;
@@ -73,9 +72,12 @@ public class PlayerThrow : MonoBehaviour
 
     private IEnumerator ThrowTime()
     {
+        Debug.Log(1);
         yield return new WaitForSeconds(10);
 
         CurrentState = ThrowStates.Right;
+        Debug.Log("RIGHT");
         GlobalEventManager.SendReloadQ();
+        Debug.Log(CurrentState);
     }
 }

@@ -10,12 +10,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject men;
 
     [Header(" ")]
+    [SerializeField] private GameObject q;
+
+    [Header(" ")]
     [SerializeField] private TextMeshProUGUI timer;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private List<AudioClip> nature;
     [SerializeField] private AudioClip dayMusic;
     [SerializeField] private AudioClip nightMusic;
-    public int NightTime { get; } = 10;
+    public int NightTime { get; } = 60;
 
     private void Start()
     {
@@ -66,6 +69,7 @@ public class GameManager : MonoBehaviour
         men.SetActive(false);
         granny.transform.position = men.transform.position;
         granny.SetActive(true);
+        q.SetActive(true);
     }
 
     private void SetActiveMen()
@@ -73,5 +77,6 @@ public class GameManager : MonoBehaviour
         granny.SetActive(false);
         men.transform.position = granny.transform.position;
         men.SetActive(true);
+        q.SetActive(false);
     }
 }
