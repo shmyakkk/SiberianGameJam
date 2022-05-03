@@ -678,7 +678,6 @@ GameObject:
   - component: {fileID: 5568306982494659684}
   - component: {fileID: 5568306982494659685}
   - component: {fileID: 5568306982494659687}
-  - component: {fileID: 9054797025069952439}
   m_Layer: 0
   m_Name: Granny
   m_TagString: Player
@@ -874,14 +873,14 @@ MonoBehaviour:
   speed: 5
   audioSource: {fileID: 5568306982494659686}
   steps:
-  - {fileID: 8300000, guid: aaa82ec7492a6d64bb4d15cb12797023, type: 3}
-  - {fileID: 8300000, guid: 0a4a293de08a865469bb5006092e57d0, type: 3}
-  - {fileID: 8300000, guid: d8a4f53017661784aa033a5136260117, type: 3}
-  - {fileID: 8300000, guid: e1154ac0a28600349a6b95b2fd210860, type: 3}
-  - {fileID: 8300000, guid: 60bcdb81342fc0b4eb17419be6ddb7cb, type: 3}
-  - {fileID: 8300000, guid: 30f47dfef0a04a3458ed8f6bc52c0cec, type: 3}
-  - {fileID: 8300000, guid: 3f0ccd13455a34d4da144497d577d8a7, type: 3}
-  - {fileID: 8300000, guid: 7b1f1ccc4df7c1f4a9ee2f9f447f63fd, type: 3}
+  - {fileID: 8300000, guid: 560dc4fe612bf0d4bb6b569b8dd59d7d, type: 3}
+  - {fileID: 8300000, guid: 1f0ac02dd715555419ee018b2b870722, type: 3}
+  - {fileID: 8300000, guid: 77cd0d878eb0078479585317220189c3, type: 3}
+  - {fileID: 8300000, guid: 8867a4ba06b33d8489d68d4986ab99af, type: 3}
+  - {fileID: 8300000, guid: 0b4b718b37ce99e4e9c939233c990977, type: 3}
+  - {fileID: 8300000, guid: 4f8a49a087ee9e54e8758a79444499ca, type: 3}
+  - {fileID: 8300000, guid: 3e382186a41e35d47a835ac130466696, type: 3}
+  - {fileID: 8300000, guid: c7c7a25d86accbe41b041f4197ab7eec, type: 3}
   stepsNight:
   - {fileID: 8300000, guid: c89d494f22cac7b4a83b2fdc750980c5, type: 3}
   - {fileID: 8300000, guid: 9d325535ecb793347b65a0ca3fc9dc07, type: 3}
@@ -893,20 +892,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 59f657027b535db48a959930b490d1e2, type: 3}
   ladder: {fileID: 8300000, guid: 9cba58e1bc0eeba469fe7984000aff40, type: 3}
   ladderNight: {fileID: 8300000, guid: 3ecb1065e9256db49adc632b5b9fc98b, type: 3}
---- !u!114 &9054797025069952439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4722007043117340977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5bd5f07a3a85594196461b7c8213c4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dayView: {fileID: 4722007043117340977}
-  nightView: {fileID: 0}
 --- !u!1 &4743214573877955923
 GameObject:
   m_ObjectHideFlags: 0
