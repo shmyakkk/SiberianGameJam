@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class OvenBar : PlayerBars
 {
-    public float fuel = 0f;
+    public static float fuel = 0f;
     void Start()
     {
         SetDefaultValue();
@@ -23,7 +23,7 @@ public class OvenBar : PlayerBars
         {
             yield return new WaitForSeconds(1);
             fuel += 0.02f;
-            //Debug.Log(fuel);
+            Debug.Log(fuel);
         }
     }
 }

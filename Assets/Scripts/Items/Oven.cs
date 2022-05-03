@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class Oven : BaseItem
 {
-    [SerializeField] private OvenBar fuel;
+
     private void Start()
     {
-        fuel = GetComponent<OvenBar>();
-    }
-    private void Update()
-    {
-        fuel.fuel++;
-    }
 
+    }
+    private void FixedUpdate()
+    {
+
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && OvenBar.fuel > 0f)
+        {
+            OvenBar.fuel -= 0.05f;
+        }
+    }
 }
