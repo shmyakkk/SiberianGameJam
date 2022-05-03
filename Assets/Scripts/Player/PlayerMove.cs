@@ -92,7 +92,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            playerAnim.speed = 0;
+            //playerAnim.speed = 0;
             playerAnim.Play("Stay");
         }
 
@@ -122,7 +122,7 @@ public class PlayerMove : MonoBehaviour
         if (other.CompareTag("Ground"))
         {
             useStair = true;
-            playerThrow.CurrentState = PlayerThrow.ThrowStates.Disabled;
+            if(!isDay) playerThrow.CurrentState = PlayerThrow.ThrowStates.Disabled;
         }
         if (other.CompareTag("Stair"))
         {
