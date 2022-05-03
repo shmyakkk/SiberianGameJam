@@ -28,6 +28,7 @@ public class Bomb : MonoBehaviour
         bang.Play();
 
         audioSource.PlayOneShot(bombSound);
-        Destroy(gameObject);
+        EnemyController.BombCoord = transform.position;
+        Destroy(gameObject);    
     }
 }
