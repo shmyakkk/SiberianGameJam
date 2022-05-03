@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     Transform tr;
     Rigidbody rb;
     public GameObject[] Spawner;
-    [SerializeField]private GameObject Player,Enemy;
+    [SerializeField]private GameObject Player,Enemy,ForPlayerB;
     [SerializeField] private bool ToTheRight;
     [SerializeField] private float speed,Patrol_distans,VisionFace,VisionBack,VertVision, chanseClimbing,rotationSpeed;
     private bool climbing = false, already = false, harassment = false;
@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     private int dir = 1, up = 8;
     public static Vector3 BombCoord;
     private float chanse = 0;
-    private bool Boom;
+    private bool Boom; 
     void Start()
     {
 
@@ -144,8 +144,9 @@ public class EnemyController : MonoBehaviour
                 StartCoroutine(Waiting(2));
             }
         }
-        if (other.gameObject.CompareTag("Player")){
+        if (other.gameObject.CompareTag("tapok")){
             Spawn();
+            ForPlayerB.GetComponent<StressBar>().CurrentValue += 30;
             Destroy(gameObject);
         }
     }

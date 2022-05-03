@@ -9,7 +9,7 @@ public class PlayerBars : MonoBehaviour
     private float currentValue;
 
     protected float MaxValue { get; set; } = 100;
-    protected float CurrentValue { get => currentValue; set => currentValue = value; }
+    public float CurrentValue { get => currentValue; set => currentValue = value; }
 
     protected void SetDefaultValue()
     {
