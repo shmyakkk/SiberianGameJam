@@ -12,7 +12,7 @@ public class PlayerThrow : MonoBehaviour
     private Vector3 direction;
     private Vector3 position;
 
-    private void Start() => GlobalEventManager.OnEnterQ.AddListener(AvailableThrow);
+    private void Awake() => GlobalEventManager.OnEnterQ.AddListener(EnterThrow);
     private void Update() => ThrowBomb();
 
     public ThrowStates CurrentState { get; set; } = ThrowStates.Right;
@@ -42,14 +42,16 @@ public class PlayerThrow : MonoBehaviour
                 if (CurrentState == ThrowStates.Left)
                 {
                     direction = new Vector3(-1, 1, 0);
-                    position = Vector3.left;
+                    position = new Vector3(-1.5f, 2, 0);
                 }
 
                 if (CurrentState == ThrowStates.Right)
                 {
                     direction = new Vector3(1, 1, 0);
-                    position = Vector3.right;
+                    position = new Vector3(1.5f, 2, 0);
                 }
+
+                Debug.Log(position);
 
                 var currentBomb = Instantiate(bomb, gameObject.transform.position + position, bomb.transform.rotation);
                 currentBomb.GetComponent<Bomb>().Force = force;
@@ -63,13 +65,13 @@ public class PlayerThrow : MonoBehaviour
         }
     }
 
-    private void AvailableThrow()
+    private void EnterThrow()
     {
         CurrentState = ThrowStates.Disabled;
-        StartCoroutine(AvailableThrowTime());
+        StartCoroutine(ThrowTime());
     }
 
-    private IEnumerator AvailableThrowTime()
+    private IEnumerator ThrowTime()
     {
         yield return new WaitForSeconds(10);
 
