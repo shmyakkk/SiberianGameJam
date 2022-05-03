@@ -75,6 +75,7 @@ public class PlayerMove : MonoBehaviour
 
         if (!isDay)
         {
+            Debug.Log(2);
             if (inputX > 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Right;
             if (inputX < 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Left;
         }
@@ -122,7 +123,7 @@ public class PlayerMove : MonoBehaviour
         if (other.CompareTag("Ground"))
         {
             useStair = true;
-            if(!isDay) playerThrow.CurrentState = PlayerThrow.ThrowStates.Disabled;
+            //if(!isDay) playerThrow.CurrentState = PlayerThrow.ThrowStates.Disabled;
         }
         if (other.CompareTag("Stair"))
         {

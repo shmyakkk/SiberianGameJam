@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Q : MonoBehaviour
 {
     private Image bar;
-    private bool isEnter = false;
+    public bool isEnter = false;
 
     public float WaitTime { get; set; } = 10f;
 
@@ -29,5 +29,4 @@ public class Q : MonoBehaviour
         isEnter = true;
     }
     private void ReloadQ() => isEnter = false;
-
 }
