@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &31972521 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4722007043117340977, guid: 6eb3ef4ad0ccf85499adb9f34193e693, type: 3}
-  m_PrefabInstance: {fileID: 909394609}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &194297933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1183,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778374214}
   m_CullTransparentMesh: 1
---- !u!1001 &909394609
+--- !u!1001 &864005671
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1197,23 +1192,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4722007043117340977, guid: 6eb3ef4ad0ccf85499adb9f34193e693, type: 3}
       propertyPath: m_Name
-      value: BABKA
-      objectReference: {fileID: 0}
-    - target: {fileID: 4722007043117340977, guid: 6eb3ef4ad0ccf85499adb9f34193e693, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Granny
       objectReference: {fileID: 0}
     - target: {fileID: 5389718930528306059, guid: 6eb3ef4ad0ccf85499adb9f34193e693, type: 3}
       propertyPath: m_RootOrder
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5389718930528306059, guid: 6eb3ef4ad0ccf85499adb9f34193e693, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5389718930528306059, guid: 6eb3ef4ad0ccf85499adb9f34193e693, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5389718930528306059, guid: 6eb3ef4ad0ccf85499adb9f34193e693, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1353,7 +1336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7847f555049e914c9da9c004f104020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 31972521}
+  player: {fileID: 0}
   distanceFromPlayer: {x: 0, y: 3, z: -5}
 --- !u!1 &1014482944
 GameObject:
@@ -2891,7 +2874,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d7010446eba1cbd429bcdab5cdb6db3f, type: 2}
+  - {fileID: 2100000, guid: a827efa7c01007d44bdcfcf6c05afbdc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
