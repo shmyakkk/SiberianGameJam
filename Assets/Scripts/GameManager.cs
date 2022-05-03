@@ -5,11 +5,6 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Characters")]
-    [SerializeField] private GameObject granny;
-    [SerializeField] private GameObject men;
-
-    [Header(" ")]
     [SerializeField] private TextMeshProUGUI timer;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private List<AudioClip> nature;
@@ -27,9 +22,6 @@ public class GameManager : MonoBehaviour
         GlobalEventManager.OnStartedDay.AddListener(PlayDayMusic);
         GlobalEventManager.OnStartedNight.AddListener(StartNightTimer);
         GlobalEventManager.OnStartedNight.AddListener(PlayNightMusic);
-
-        GlobalEventManager.OnStartedDay.AddListener(SetActiveMen);
-        GlobalEventManager.OnStartedNight.AddListener(SetActiveGranny);
 
         InvokeRepeating(nameof(RandomSound), 5, Random.Range(10, 15));
 
@@ -60,18 +52,4 @@ public class GameManager : MonoBehaviour
 
     private void PlayDayMusic() => audioSource.PlayOneShot(dayMusic);
     private void PlayNightMusic() => audioSource.PlayOneShot(nightMusic);
-
-    private void SetActiveGranny()
-    {
-        men.SetActive(false);
-        granny.transform.position = men.transform.position;
-        granny.SetActive(true);
-    }
-
-    private void SetActiveMen()
-    { 
-        granny.SetActive(false);
-        men.transform.position = granny.transform.position;
-        men.SetActive(true);
-    }
 }
