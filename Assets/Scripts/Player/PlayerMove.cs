@@ -78,11 +78,11 @@ public class PlayerMove : MonoBehaviour
 
         playerRB.velocity = directionVector * speed;
 
-        if (inputX != 0) PlayStepsSound(); // шаги
+        if (inputX != 0) PlayStepsSound(); // пїЅпїЅпїЅпїЅ <-- РЁРѕ СЌС‚Рѕ?
 
         /*if (useStair)
         {
-            if (inputY != 0) PlayLadderSound(); // лестница лучше не включать..
+            if (inputY != 0) PlayLadderSound(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ..  <-- Р СЌС‚Рѕ???
             else audioSource.Stop();
         }*/
     }
@@ -107,7 +107,6 @@ public class PlayerMove : MonoBehaviour
             useStair = true;
             playerThrow.CurrentState = PlayerThrow.ThrowStates.Disabled;
         }
-
         if (other.CompareTag("Stair"))
         {
             isStair = false;
