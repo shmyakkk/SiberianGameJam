@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [Header("Animation")]
+    [SerializeField] private Animator playerAnim;
+    [Header(" ")]
     [SerializeField] private float speed = 3f;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private List<AudioClip> steps;
     [SerializeField] private List<AudioClip> stepsNight;
     [SerializeField] private AudioClip ladder;
     [SerializeField] private AudioClip ladderNight;
-    [SerializeField] private AudioClip voiceInsane;
+    //[SerializeField] private AudioClip voiceInsane;
 
     private Rigidbody playerRB;
     private PlayerThrow playerThrow;
@@ -62,30 +65,44 @@ public class PlayerMove : MonoBehaviour
         if (isStair) inputY = Input.GetAxis("Vertical");
 
         Vector3 directionVector = new Vector3(inputX, inputY, 0);
-        Vector3 rotationVector = new Vector3(-inputX, 0, 0);
+        Vector3 rotationVector = new Vector3(inputX, 0, 0);
 
         if (inputY != 0 && isStair)
         {
-            rotationVector = Vector3.back;
+            rotationVector = Vector3.forward;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(stairPos.x, transform.position.y, transform.position.z), 3 * Time.deltaTime);
         }
 
-        if (inputX > 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Right;
-        if (inputX < 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Left;
+        if (!isDay)
+        {
+            if (inputX > 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Right;
+            if (inputX < 0 && playerThrow.CurrentState != PlayerThrow.ThrowStates.Disabled) playerThrow.CurrentState = PlayerThrow.ThrowStates.Left;
+        }
 
         if (directionVector.magnitude > Mathf.Abs(0.1f))
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotationVector), Time.deltaTime * 10);
 
         playerRB.velocity = directionVector * speed;
 
-        if (inputX != 0) PlayStepsSound(); // шаги
+        if (inputX != 0)
+        {
+            playerAnim.speed = 1;
+            playerAnim.Play("Move");
+            PlayStepsSound(); // пїЅпїЅпїЅпїЅ <-- РЁРѕ СЌС‚Рѕ?  ento russciy yzic
+        }
+        else
+        {
+            //playerAnim.speed = 0;
+            playerAnim.Play("Stay");
+        }
 
         /*if (useStair)
         {
-            if (inputY != 0) PlayLadderSound(); // лестница лучше не включать..
+            if (inputY != 0) PlayLadderSound(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ..  <-- Р СЌС‚Рѕ??? i ento toze
             else audioSource.Stop();
         }*/
     }
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -105,9 +122,8 @@ public class PlayerMove : MonoBehaviour
         if (other.CompareTag("Ground"))
         {
             useStair = true;
-            playerThrow.CurrentState = PlayerThrow.ThrowStates.Disabled;
+            if(!isDay) playerThrow.CurrentState = PlayerThrow.ThrowStates.Disabled;
         }
-
         if (other.CompareTag("Stair"))
         {
             isStair = false;
