@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class Oven : BaseItem
 {
+    [SerializeField] private OvenBar ovenBar;
 
-    private void Start()
+    public override void Enter()
     {
-
-    }
-    private void FixedUpdate()
-    {
-
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player") && OvenBar.fuel > 0f)
-        {
-            OvenBar.fuel -= 0.05f;
-        }
+        base.Enter();
+        Debug.Log(12);
+        ovenBar.CurrentValue = 100;
+        Available = true;
     }
 }
